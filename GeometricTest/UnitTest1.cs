@@ -13,11 +13,23 @@ namespace GeometricTest
             GeometricFigures.Circle obj1 = new GeometricFigures.Circle(0);
             Assert.AreEqual(0, obj1.getAreaCircle());
         }
+
+
+        [Test]
+        public void TestAreaCircle()
+        {
+            Assert.Throws<Exception>(() => {
+                GeometricFigures.Circle obj = new GeometricFigures.Circle(-10);
+                var area = obj.getAreaCircle();
+            }, "Должно быть Exception, а его нет ");
+        }
+
         [Test]
         public void TestAreaCircle2()
         {
+            const double delta = 0.05;
             GeometricFigures.Circle obj2 = new GeometricFigures.Circle(20);
-            Assert.AreEqual(1256.64, Math.Round(obj2.getAreaCircle(),2));
+            Assert.AreEqual(1256.63, obj2.getAreaCircle(),delta);
         }
 
         [Test]
@@ -25,12 +37,16 @@ namespace GeometricTest
         {
             GeometricFigures.Circle obj3 = new GeometricFigures.Circle(0);
             Assert.AreEqual(0, obj3.getLengthCircle());
+           
+        }
 
-            if (obj3.getAreaCircle() < 0)
-            {
-                Assert.Throws<InvalidOperationException>(() => { throw new InvalidOperationException(); });
-            }
-
+        [Test]
+        public void TestLenghtCircle()
+        {
+            Assert.Throws<Exception>(() => {
+                GeometricFigures.Circle obj = new GeometricFigures.Circle(0);
+                var length = obj.getLengthCircle();
+            }, "Должно быть Exception, а его нет ");
         }
 
         [Test]
@@ -76,6 +92,14 @@ namespace GeometricTest
             Assert.AreEqual(0, triangle.getAreaTriangle());
         }
 
+        [Test]
+        public void TestAreaTriangle()
+        {
+            Assert.Throws<Exception>(() => {
+                GeometricFigures.Triangle obj = new GeometricFigures.Triangle(0,0,0);
+                var area = obj.getAreaTriangle();
+            }, "Должно быть Exception, а его нет ");
+        }
         [Test]
         public void TestAreaTriangle2()
         {
