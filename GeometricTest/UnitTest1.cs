@@ -8,147 +8,138 @@ namespace GeometricTest
     public class UnitTest1
     {
         [Test]
-        public void TestAreaCircle1()
+        public void TestGetAreaCirclePositive()
         {
-            GeometricFigures.Circle obj1 = new GeometricFigures.Circle(0);
-            Assert.AreEqual(0, obj1.getAreaCircle());
+            double delta = 0.05;
+            for (int r = 0; r < 21; r++)
+
+            {
+                double expectedsq = Math.PI * r * r;
+                GeometricFigures.Circle circle = new GeometricFigures.Circle(r);
+                double actualsq = circle.getAreaCircle();
+                Assert.AreEqual(expectedsq, actualsq, delta, "It doesn't work with argument = {0}", r);
+            }
+        }
+
+        [Test]
+        public void TestGetLenghtCirclePositive()
+        {
+            double delta = 0.05;
+            for (int r = 0; r < 21; r++)
+
+            {
+                double expectedln = Math.PI * 2 * r;
+                GeometricFigures.Circle circle = new GeometricFigures.Circle(r);
+                double actualln = circle.getLengthCircle();
+                Assert.AreEqual(expectedln, actualln, delta, "It doesn't work with argument = {0}", r);
+            }
         }
 
 
         [Test]
-        public void TestAreaCircle()
+        public void TestGetAreaSquarePositive()
         {
-            Assert.Throws<Exception>(() => {
+            double delta = 0.05;
+            for (int a = 0; a < 21; a++)
+
+            {
+                
+                    double expectedsq = a * a;
+                    GeometricFigures.Square square = new GeometricFigures.Square(a);
+                    double actualsq = square.getAreaSquare();
+                    Assert.AreEqual(expectedsq, actualsq, delta, "It doesn't work with argument = {0}", a);
+                
+            }
+        }
+
+        [Test]
+        public void TestGetlengthSquarePositive()
+        {
+            double delta = 0.05;
+            for (int a = 0; a < 21; a++)
+
+            {
+               
+                    double expectedsq = 4 * a;
+                    GeometricFigures.Square square = new GeometricFigures.Square(a);
+                    double actualsq = square.getLengthSquare();
+                    Assert.AreEqual(expectedsq, actualsq, delta, "It doesn't work with argument = {0}", a);
+                
+            }
+        }
+
+
+        [Test]
+        public void TestGetAreaTrianglePositive()
+        {
+            double delta = 0.05;
+            for (int a = 1; a < 21; a++)
+            {
+                for (int b = 1; b < 21; b++)
+                {
+                    for (int c = 1; c < 21; c++)
+                    {
+                        if (((a < b + c) & (a > b - c)) & ((b < a + c) & (b > a - c)) & ((c < a + b) & (c > a - b)))
+                        {
+                            double p = (double)(a + b + c) / 2;
+                            double expectedsq = Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+                            GeometricFigures.Triangle square = new GeometricFigures.Triangle(a, b, c);
+                            double actualsq = square.getAreaTriangle();
+                            Assert.AreEqual(expectedsq, actualsq, delta, "It doesn't work with arguments ={0},{1},{2}", a, b, c);
+                        }
+                    }
+                }
+            }
+        }
+
+        [Test]
+        public void TestGetLengthTrianglePositive()
+        {
+            double delta = 0.05;
+            for (int a = 1; a < 21; a++)
+            {
+                for (int b = 1; b < 21; b++)
+
+                {
+                    for (int c = 1; c < 21; c++)
+
+                    {
+                        if (((a < b + c) & (a > b - c)) & ((b < a + c) & (b > a - c)) & ((c < a + b) & (c > a - b)))
+
+                        {
+                            double expectedsq = a + b + c;
+                            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(a, b, c);
+                            double actualsq = triangle.getLengthTriangle();
+                            Assert.AreEqual(expectedsq, actualsq, delta, "It doesn't work with arguments = {0},{1},{2}", a, b, c);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        [Test]
+        public void TestGetAreaCircleNegative()
+        {
+            Assert.Throws<Exception>(() =>
+            {
                 GeometricFigures.Circle obj = new GeometricFigures.Circle(-10);
                 var area = obj.getAreaCircle();
-            }, "Должно быть Exception, а его нет ");
-        }
-
-        [Test]
-        public void TestAreaCircle2()
-        {
-            const double delta = 0.05;
-            GeometricFigures.Circle obj2 = new GeometricFigures.Circle(20);
-            Assert.AreEqual(1256.63, obj2.getAreaCircle(),delta);
-        }
-
-        [Test]
-        public void TestLenghtCircle1()
-        {
-            GeometricFigures.Circle obj3 = new GeometricFigures.Circle(0);
-            Assert.AreEqual(0, obj3.getLengthCircle());
-           
-        }
-
-        [Test]
-        public void TestLenghtCircle()
-        {
-            Assert.Throws<Exception>(() => {
-                GeometricFigures.Circle obj = new GeometricFigures.Circle(0);
-                var length = obj.getLengthCircle();
-            }, "Должно быть Exception, а его нет ");
-        }
-
-        [Test]
-        public void TestLenghtCircle2()
-        {
-            GeometricFigures.Circle obj4 = new GeometricFigures.Circle(20);
-            Assert.AreEqual(125.66,Math.Round(obj4.getLengthCircle(),2));
-            
-        }
-
-         [Test]
-         public void TestAreaSquare1()
-        {
-            GeometricFigures.Square square = new GeometricFigures.Square(0);
-            Assert.AreEqual(0, square.getAreaSquare());
-        }
-
-        [Test]
-        public void TestAreaSquare2()
-        {
-            GeometricFigures.Square square = new GeometricFigures.Square(20);
-            Assert.AreEqual(400, Math.Round(square.getAreaSquare(),2));
-        }
-
-        [Test]
-        public void TestlengthSquare1()
-        {
-            GeometricFigures.Square square = new GeometricFigures.Square(0);
-            Assert.AreEqual(0,square.getLengthSquare());
-        }
-
-        [Test]
-        public void TestlengthSquare2()
-        {
-            GeometricFigures.Square square = new GeometricFigures.Square(20);
-            Assert.AreEqual(80, Math.Round(square.getLengthSquare(), 2));
-        }
-
-        [Test]
-        public void TestAreaTriangle1()
-        {
-            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(0,0,0);
-            Assert.AreEqual(0, triangle.getAreaTriangle());
-        }
-
-        [Test]
-        public void TestAreaTriangle()
-        {
-            Assert.Throws<Exception>(() => {
-                GeometricFigures.Triangle obj = new GeometricFigures.Triangle(0,0,0);
-                var area = obj.getAreaTriangle();
-            }, "Должно быть Exception, а его нет ");
-        }
-        [Test]
-        public void TestAreaTriangle2()
-        {
-            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(0,0,20);
-            Assert.IsNaN(triangle.getAreaTriangle());
-        }
-        [Test]
-        public void TestAreaTriangle3()
-        {
-            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(0, 20, 20);
-            Assert.AreEqual(0, triangle.getAreaTriangle());
-        }
-
-        [Test]
-        public void TestAreaTriangle4()
-        {
-            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(20,20,20);
-            Assert.AreEqual(173.21, Math.Round(triangle.getAreaTriangle(), 2));
-        }
-
-        [Test]
-        public void TestLengthTriangle1()
-        {
-            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(0, 0, 0);
-            Assert.AreEqual(0, triangle.getLengthTriangle());
-        }
-
-        [Test]
-        public void TestLengthTriangle2()
-        {
-            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(0, 0, 20);
-            Assert.AreEqual(20,triangle.getLengthTriangle());
-        }
-        [Test]
-        public void TestLengthTriangle3()
-        {
-            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(0, 20, 20);
-            Assert.AreEqual(40, triangle.getLengthTriangle());
-        }
-        
-        [Test]
-        public void TestLengthTriangle4()
-        {
-            GeometricFigures.Triangle triangle = new GeometricFigures.Triangle(20, 20, 20);
-            Assert.AreEqual(60, Math.Round(triangle.getLengthTriangle(), 2));
+            }, "Exception is expected");
         }
 
 
+
+        [Test]
+        public void TestGetAreaTriangleNegative()
+        {
+            Assert.Throws<Exception>(() =>
+            {
+                var triangle = new GeometricFigures.Triangle(-1, 1, 10);
+                var actualsq = triangle.getAreaTriangle();
+            },"Exception is expected");
+        }
+
+       
     }
-
-
 }
